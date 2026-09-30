@@ -1,0 +1,19 @@
+const roles=[
+['North Carolina Office of the Governor','Communications Intern','August 2026 – Present','Write press releases, speeches, and memos for the Governor’s public communications on state policies. Analyze media trends and emerging issues to shape leadership’s talking points and public responses.'],
+['North Carolinians Against Gun Violence Action Fund','President','October 2024 – Present','Lead research and targeted outreach to engage 9,500+ members in gun violence prevention advocacy. Manage a $120K budget and stakeholder partnerships to drive advocacy and community outreach.'],
+['U.S. House of Representatives','Intern · Office of Representative Marilyn Strickland','June 2026 – August 2026','Researched AI and economic policy and wrote legislative memos to inform policy priorities. Managed phone, email, and IQ CRM communications to address constituent and stakeholder inquiries.'],
+['Raleigh Boots on the Ground','Intern','November 2023 – August 2025','Managed digital outreach and a $25K budget, boosting engagement 218% to aid 300+ violence survivors.'],
+['Club Pilates Chapel Hill','Senior Sales Associate','February 2023 – Present','Generated $50K+ in membership sales through consultative sales and targeted customer outreach.'],
+['Students Demand Action at UNC','President','August 2023 – Present','Lead 150+ members and manage budgets, events, and outreach reaching 50K+ to advance gun safety.'],
+['UNC Public Policy Capstone · Wake County Government','Consulting Team Member','August 2026 – Present','Develop research-based recommendations and benchmarks to improve county public engagement.'],
+['Korean American Grassroots Conference','Congressional Fellow / Research Intern','June 2025 – August 2026','Researched 50+ legislators’ priorities in depth to deliver foreign policy recommendations to legislators.'],
+['The Carrboro Defender','Contributing Writer','December 2025 – Present','Analyze audience trends to write digital articles and content that make local issues clear to readers.'],
+['March for Our Lives Cary','President / Co-Founder','June 2022 – August 2023','Mobilized 3,000+ attendees and secured national media coverage to advance gun violence prevention.'],
+['Capital Area Teen Court','Attorney','January 2022 – June 2023','Researched cases and presented evidence-based arguments to represent youth in court proceedings.'],
+['Jonathan Richardson Law Team','Law Intern','June 2022 – August 2022','Completed 150+ hours of casework and shadowing to support legal research and case preparation.']
+];
+const featuredOrganizations = ['Club Pilates Chapel Hill', 'Raleigh Boots on the Ground', 'North Carolina Office of the Governor', 'U.S. House of Representatives'];
+const orderedRoles = [...featuredOrganizations.map(name => roles.find(role => role[0] === name)), ...roles.filter(role => !featuredOrganizations.includes(role[0]))];
+document.querySelector('#roles').innerHTML=orderedRoles.map((r,i)=>`<details class="role ${i>3?'extra':''}"><summary><div><h3>${r[0]}</h3><div class="position">${r[1]}</div></div><time>${r[2]}</time><span class="plus" aria-hidden="true">+</span></summary><div class="details">${r[3]}</div></details>`).join('');
+document.querySelector('#more-roles').addEventListener('click',function(){const expanded=this.getAttribute('aria-expanded')!=='true';document.querySelector('#roles').classList.toggle('show-all',expanded);this.setAttribute('aria-expanded',expanded);this.innerHTML=expanded?'Show less <span>−</span>':'View all experience <span>+</span>';});
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',b===button)});document.querySelectorAll('[data-category]').forEach(card=>card.hidden=button.dataset.filter!=='all'&&card.dataset.category!==button.dataset.filter)}));
